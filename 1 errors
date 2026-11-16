@@ -1,0 +1,41 @@
+ Plot Truncation and round –off error
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+
+# Value of x
+x = 1
+
+# True value of e^x
+true_value = math.exp(x)
+
+terms = np.arange(1, 11)
+truncation_error = []
+roundoff_error = []
+
+approx_value = 0
+
+for n in terms:
+    approx_value += (x**(n-1)) / math.factorial(n-1)
+    
+    # Truncation Error
+    trunc_error = abs(true_value - approx_value)
+    truncation_error.append(trunc_error)
+    
+    # Round-off Error (rounding to 4 decimal places)
+    rounded_value = round(approx_value, 4)
+    round_error = abs(approx_value - rounded_value)
+    roundoff_error.append(round_error)
+
+# Plotting the errors
+plt.figure()
+plt.plot(terms, truncation_error, marker='o', label='Truncation Error')
+plt.plot(terms, roundoff_error, marker='s', label='Round-off Error')
+plt.xlabel('Number of Terms')
+plt.ylabel('Error')
+plt.title('Truncation and Round-off Errors')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
