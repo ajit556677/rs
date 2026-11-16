@@ -1,0 +1,35 @@
+RK 4TH ORDER
+import numpy as np
+import matplotlib.pyplot as plt
+# Circuit parameters
+R = 10 # Resistance in ohms
+L = 2 # Inductance in henrys
+V0 = 40 # Step voltage in volts
+# Simulation parameters
+t0 = 0
+tf = 0.1 # final time in seconds
+h = 0.1 # time step
+# Time array
+t = np.arange(t0, tf+h, h)
+i = np.zeros_like(t)
+# Differential equation
+def f(t, i):
+    V = V0 # Step input
+    return (20- 5*i)
+# RK4 integration
+for n in range(len(t)-1):
+   k1 = f(t[n], i[n])
+   k2 = f(t[n] + h/2, i[n] + h/2 * k1)
+   k3 = f(t[n] + h/2, i[n] + h/2 * k2)
+   k4 = f(t[n] + h, i[n] + h * k3)
+   i[n+1] = i[n] + (h/6)*(k1 + 2*k2 + 2*k3 + k4)
+
+# Plot the transient response
+plt.figure(figsize=(8,4))
+plt.plot(t, i, color='blue', linewidth=2)
+plt.xlabel('Time (s)')
+plt.ylabel('Current (A)')
+plt.title('Transient Response of Series RL Circuit (RK4 Method)')
+plt.grid(True)
+plt.show()
+    
