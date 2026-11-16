@@ -1,0 +1,40 @@
+PROGRAM ON LAGRANGE INTERPOLATION FORMULA
+INPUT:
+import numpy as np
+
+n = int(input("Enter number of data points: "))
+
+x = np.zeros(n)
+y = np.zeros(n)
+
+print("Enter data for x and y:")
+for i in range(n):
+    x[i] = float(input("x[%d] = " % i))
+    y[i] = float(input("y[%d] = " % i))
+
+xp = float(input("Enter interpolation point: "))
+
+yp = 0
+
+for i in range(n):
+    p = 1
+    for j in range(n):
+        if i != j:
+            p = p * (xp - x[j]) / (x[i] - x[j])
+    yp = yp + p * y[i]
+
+print("Interpolated value at x = %f is y = %f" % (xp, yp))
+
+OUTPUT:
+Enter number of data points: 4
+Enter data for x and y:
+x[0] = 0
+y[0] = 2.3
+x[1] = 1.2
+y[1] = 4
+x[2] = 3
+y[2] = 7.5
+x[3] = 4
+y[3] = 8
+Enter interpolation point: 2
+Interpolated value at x = 2.000000 is y = 5.691534
