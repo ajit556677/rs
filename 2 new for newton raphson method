@@ -1,0 +1,81 @@
+F or Newton raphson method
+ Input:
+def f(x):
+return (x**3 - 5*x + 1)
+
+a = float(input("Enter the first guess: "))
+b = float(input("Enter the second guess: "))
+n = int(input("Enter the number of iterations: "))
+
+i = 0
+while i < n:
+c = (a*f(b) - b*f(a)) / (f(b) - f(a))
+print(f"For {i+1}th iteration root is {round(c,4)}")
+
+if f(a) * f(c) < 0:
+b = c
+else:
+a = c
+
+i = i + 1
+Output:
+Enter the first guess: 0
+Enter the second guess: 1
+Enter the number of iterations: 5
+For 1th iteration root is 0.25
+For 2th iteration root is 0.2025
+For 3th iteration root is 0.2017
+For 4th iteration root is 0.2016
+For 5th iteration root is 0.2016
+
+ For Bisection Method
+Input:
+def f(x):
+ return (x**3 - 5*x + 1)
+a = float(input("Enter the first guess: "))
+b = float(input("Enter the second guess: "))
+n = int(input("Enter the number of iterations: "))
+i = 0
+while i < n:
+ c = (a + b) / 2
+ print(f"For {i+1}th iteration root is {round(c,4)}")
+ 
+ if f(a) * f(c) < 0:
+ b = c
+ else:
+ a = c
+ i = i + 1
+Output:
+Enter the first guess: 0
+Enter the second guess: 1
+Enter the number of iterations: 5
+For 1th iteration root is 0.5
+For 2th iteration root is 0.25
+For 3th iteration root is 0.125
+For 4th iteration root is 0.1875
+For 5th iteration root is 0.2188
+
+ For Regula Falsi method
+Input:
+def f(x):
+ return (x**3 - 5*x + 1)
+def df(x):
+ return (3*x**2 - 5)
+x0 = float(input("Enter the initial guess: "))
+n = int(input("Enter the number of iterations: "))
+i = 0
+while i < n:
+ x1 = x0 - (f(x0) / df(x0))
+ print(f"For {i+1}th iteration root is {round(x1,4)}")
+ x0 = x1
+ i = i + 1
+Output: 
+Enter the initial guess: 0
+Enter the number of iterations: 5
+For 1th iteration root is 0.2
+For 2th iteration root is 0.2016
+For 3th iteration root is 0.2016
+For 4th iteration root is 0.2016
+For 5th iteration root is 0.2016
+
+f
