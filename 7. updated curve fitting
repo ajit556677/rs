@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt # Needed for plotting
+
+# Generate noisy voltage-time data
+np.random.seed(0)
+t = np.linspace(0, 2, 10)  # time (s)
+V_true = 5 * np.sin(0.5 * t)  # true voltage signal
+noise = np.random.normal(0, 0.33, len(t)) 
+ # Noise reduced for better fitting visualization
+V_noisy = V_true + noise  # FIX: Used V_true instead of undefined 'y'
+
+# Polynomial curve fitting (degree 3)
+degree = 3
+coeff = np.polyfit(t, V_noisy, degree)  # Fit using noisy data
+
+# Create fitted curve function
+poly = np.poly1d(coeff)
+V_fit = poly(t)  # Predicted values
+
+# Calculate R2 manually
+SS_res = np.sum((V_noisy - V_fit)**2)
+SS_tot = np.sum((V_noisy - np.mean(V_noisy))**2)
+R2 = 1 - (SS_res / SS_tot)
+
+# Calculate RMSE manually
+RMSE = np.sqrt(np.mean((V_noisy - V_fit)**2))
+
+print("Polynomial Coefficients:", coeff)
+print("R^2 value:", R2)
+print("RMSE:", RMSE)
+# Visualization
+# Create smoother line for the plot
+t_smooth = np.linspace(min(t), max(t), 85)
+V_smooth = poly(t_smooth)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(t, V_noisy, label='Noisy Data', color='blue') # FIX: Used V_noisy
+plt.plot(t_smooth, V_smooth, color='red', label='Fitted Curve (Degree 3)')
+plt.xlabel("Time (s)")
+plt.ylabel("Voltage (V)")
+plt.title("Polynomial Curve Fitting Example")
+plt.legend()
+plt.grid(True)
+plt.show()
+Polynomial Coefficients: [ 0.28334529 -1.15149967  3.12384372  0.3875556 ]
+R^2 value: 0.9534305640956281
+RMSE: 0.265972196043234
+
+
